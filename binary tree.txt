@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct tree 
+{
+  int data;
+  struct abc *left,*right;
+};
+struct tree *insert(struct tree *);
+int main()
+{
+    int ch,d,dir;
+                                        //initially gonna make root
+    struct tree *root = NULL;
+    //printf("Enter data:\n");
+    //scanf("%d",&d);
+    
+    //root = (struct tree *)malloc(sizeof(struct tree));
+    //root->data = d;
+    //root->left = NULL;
+    //root->right = NULL;
+   
+    do
+   {
+       insert(root);
+       printf("Do you want to make another node?\n");
+       scanf("%d",&ch); 
+   }
+ while(ch==1);
+ return 0;
+}
+struct tree *insert(struct tree *root)
+{
+    struct tree *temp,*new;
+    int s,dir;
+    new = (struct tree *)malloc(sizeof(struct tree));
+    
+    printf("Enter data :\n");
+    scanf("%d",&s);
+    printf("Enter direction:\n");
+    scanf("%d",&dir);
+    new->data = s;
+    new->left = NULL;
+    new->right = NULL;
+    
+    if(root==NULL)         //if only root is there
+    {
+        root = new;
+    }
+    else                     //else another nodes
+    {
+        temp = root;
+        while(1)
+        {
+            if(dir==-1)
+            {
+                if(temp->left==NULL)     //if insertion at current node
+                {
+                    temp->left = new;
+                    break;
+                }
+                else
+                {
+                    temp = temp->left;   //if insertion at next to current node
+                    temp = new;
+                    break;
+                }
+            }
+            else
+            {
+                if(temp->right==NULL)              
+                {
+                    temp->right = new;
+                    break;
+                }
+                else
+                {
+                    temp = temp->right;
+                    temp = new;
+                    break;
+                }
+            }
+        }
+    }
+}
